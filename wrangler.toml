@@ -1,45 +1,33 @@
 name = "cf-workers-chat"
-main = "src/index.ts"
+type = "javascript"
 compatibility_date = "2025-12-01"
 
-# Wrangler 配置文件中
-name = "cf-workers-chat"
-type = "javascript"
-
+# 迁移配置：使用 SQLite 存储 Durable Object
 [[migrations]]
 tag = "v1"
-new_sqlite_classes = ["ChatRoom"] # 将 ChatRoom 替换成你自己的 Durable Object 类名
+new_sqlite_classes = ["ChatRoom"]  # 这里使用 SQLite 存储，适用于免费计划
 
 [durable_objects]
 bindings = [
   { name = "ROOM", class_name = "ChatRoom" }
 ]
 
-# 静态前端（public/）会被自动上传并托管
+# 静态资源上传和托管配置
 [assets]
 directory = "./public"
 binding = "ASSETS"
 
-# Durable Object：每个 room 一个实例
-[[durable_objects.bindings]]
-name = "ROOM"
-class_name = "ChatRoom"
-
-[[migrations]]
-tag = "v1"
-new_classes = ["ChatRoom"]
-
-# D1：永久消息存储（你需要先创建 D1，然后把 database_id 填上）
+# D1 数据库配置：用于存储永久消息
 [[d1_databases]]
 binding = "DB"
 database_name = "chat-db"
-database_id = "a7e33370-465a-4086-8492-b4de2eef3c41"
+database_id = "a7e33370-465a-4086-8492-b4de2eef3c41"  # 请替换为你的数据库 ID
 
-# R2：图片/视频存储（你需要先创建 bucket）
+# R2 存储配置：用于存储图片和视频
 [[r2_buckets]]
 binding = "MEDIA"
 bucket_name = "chat-media"
 
 [vars]
-# 是否允许任何人注册（生产建议设为 "false"，只由管理员预置账号）
+# 是否允许注册：建议在生产环境中设置为 "false"，仅管理员可预置账号
 ALLOW_REGISTER = "true"
