@@ -20,7 +20,7 @@ new_classes = ["ChatRoom"]
 [[d1_databases]]
 binding = "DB"
 database_name = "chat-db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "a7e33370-465a-4086-8492-b4de2eef3c41"
 
 # R2：图片/视频存储（你需要先创建 bucket）
 [[r2_buckets]]
