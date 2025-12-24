@@ -2,6 +2,19 @@ name = "cf-workers-chat"
 main = "src/index.ts"
 compatibility_date = "2025-12-01"
 
+# Wrangler 配置文件中
+name = "cf-workers-chat"
+type = "javascript"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["ChatRoom"] # 将 ChatRoom 替换成你自己的 Durable Object 类名
+
+[durable_objects]
+bindings = [
+  { name = "ROOM", class_name = "ChatRoom" }
+]
+
 # 静态前端（public/）会被自动上传并托管
 [assets]
 directory = "./public"
