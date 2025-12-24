@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Workers Chat</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <h1>Workers Chat</h1>
+
+    <section id="authBox" class="card">
+      <div class="row">
+        <label>用户名</label>
+        <input id="username" placeholder="3-32 位字母数字 _-" />
+      </div>
+      <div class="row">
+        <label>密码</label>
+        <input id="password" type="password" placeholder="至少 8 位" />
+      </div>
+      <div class="row">
+        <button id="btnLogin">登录</button>
+        <button id="btnRegister" class="secondary">注册</button>
+        <button id="btnLogout" class="secondary" style="display:none;">退出</button>
+      </div>
+      <p class="hint" id="meHint"></p>
+    </section>
+
+    <section class="card">
+      <div class="row">
+        <label>房间</label>
+        <input id="room" value="global" />
+        <button id="btnConnect">连接</button>
+        <button id="btnDisconnect" class="secondary" disabled>断开</button>
+      </div>
+    </section>
+
+    <section class="card chat">
+      <div id="log" class="log"></div>
+
+      <div class="composer">
+        <input id="text" placeholder="输入消息..." />
+        <input id="file" type="file" />
+        <button id="btnSend" disabled>发送</button>
+      </div>
+      <p class="hint">提示：图片/视频会先上传到 R2，再在聊天室里发送链接；媒体默认需要登录才能访问。</p>
+    </section>
+  </main>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+name = "cf-workers-chat"
+main = "src/index.ts"
+compatibility_date = "2025-12-01"
+
+# 静态前端（public/）会被自动上传并托管
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Durable Object：每个 room 一个实例
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "ChatRoom"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["ChatRoom"]
+
+# D1：永久消息存储（你需要先创建 D1，然后把 database_id 填上）
+[[d1_databases]]
+binding = "DB"
+database_name = "chat-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# R2：图片/视频存储（你需要先创建 bucket）
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "chat-media"
+
+[vars]
+# 是否允许任何人注册（生产建议设为 "false"，只由管理员预置账号）
+ALLOW_REGISTER = "true"
